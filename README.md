@@ -19,4 +19,4 @@ Uma aplicação simples de lista de tarefas feita com HTML, CSS e JavaScript pur
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/vitor2054moraes-sys/to-do-list.git
+   git clone https://vitor2054moraes-sys.github.io/to-do-list/
