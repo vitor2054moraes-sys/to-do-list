@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📋 Minha Lista de Tarefas</h1>
+
+    <!-- Formulário -->
+    <form id="form-tarefa">
+      <input type="text" id="input-texto" placeholder="Nova tarefa..." required>
+      <select id="select-prioridade">
+        <option value="alta">Alta</option>
+        <option value="media" selected>Média</option>
+        <option value="baixa">Baixa</option>
+      </select>
+      <select id="select-categoria">
+        <option value="trabalho">Trabalho</option>
+        <option value="pessoal">Pessoal</option>
+        <option value="estudos">Estudos</option>
+      </select>
+      <input type="date" id="input-vencimento">
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <input type="text" id="input-busca" placeholder="🔍 Buscar...">
+      <select id="filtro-categoria">
+        <option value="todas">Todas categorias</option>
+        <option value="trabalho">Trabalho</option>
+        <option value="pessoal">Pessoal</option>
+        <option value="estudos">Estudos</option>
+      </select>
+      <select id="filtro-status">
+        <option value="todas">Todas</option>
+        <option value="pendentes">Pendentes</option>
+        <option value="concluidas">Concluídas</option>
+      </select>
+    </div>
+
+    <!-- Lista -->
+    <ul id="lista-tarefas"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
