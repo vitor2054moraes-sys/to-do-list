@@ -1,50 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Tarefas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Segurança: só arquivos deste site (nada de script de fora nem embutido). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Tique — suas tarefas em ordem</title>
+  <meta name="description" content="Tique: lista de tarefas com prioridade, categoria, prazo e busca. Os dados ficam só no seu navegador.">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>📋 Minha Lista de Tarefas</h1>
+  <main class="app">
+    <header class="topo">
+      <h1 class="marca"><img src="icone.svg" alt="" width="32" height="32"> Tique</h1>
+      <p class="lema">Suas tarefas em ordem</p>
+      <p id="resumo" class="resumo" aria-live="polite"></p>
+    </header>
 
-    <!-- Formulário -->
-    <form id="form-tarefa">
-      <input type="text" id="input-texto" placeholder="Nova tarefa..." required>
-      <select id="select-prioridade">
-        <option value="alta">Alta</option>
-        <option value="media" selected>Média</option>
-        <option value="baixa">Baixa</option>
-      </select>
-      <select id="select-categoria">
-        <option value="trabalho">Trabalho</option>
-        <option value="pessoal">Pessoal</option>
-        <option value="estudos">Estudos</option>
-      </select>
-      <input type="date" id="input-vencimento">
-      <button type="submit">Adicionar</button>
+    <!-- Nova tarefa -->
+    <form id="form-tarefa" class="cartao nova" autocomplete="off">
+      <label class="campo largo">
+        <span>Nova tarefa</span>
+        <input type="text" id="input-texto" placeholder="Ex.: pagar a conta de luz" maxlength="200" required>
+      </label>
+      <label class="campo">
+        <span>Prioridade</span>
+        <select id="select-prioridade">
+          <option value="alta">Alta</option>
+          <option value="media" selected>Média</option>
+          <option value="baixa">Baixa</option>
+        </select>
+      </label>
+      <label class="campo">
+        <span>Categoria</span>
+        <select id="select-categoria">
+          <option value="trabalho">Trabalho</option>
+          <option value="pessoal">Pessoal</option>
+          <option value="estudos">Estudos</option>
+        </select>
+      </label>
+      <label class="campo">
+        <span>Prazo (opcional)</span>
+        <input type="date" id="input-vencimento">
+      </label>
+      <button type="submit" class="principal">Adicionar</button>
     </form>
 
     <!-- Filtros -->
-    <div class="filtros">
-      <input type="text" id="input-busca" placeholder="🔍 Buscar...">
-      <select id="filtro-categoria">
-        <option value="todas">Todas categorias</option>
-        <option value="trabalho">Trabalho</option>
-        <option value="pessoal">Pessoal</option>
-        <option value="estudos">Estudos</option>
-      </select>
-      <select id="filtro-status">
-        <option value="todas">Todas</option>
-        <option value="pendentes">Pendentes</option>
-        <option value="concluidas">Concluídas</option>
-      </select>
-    </div>
+    <section class="filtros" aria-label="Filtros">
+      <label class="campo largo">
+        <span class="oculto">Buscar</span>
+        <input type="search" id="input-busca" placeholder="Buscar tarefa…">
+      </label>
+      <div class="status" role="group" aria-label="Mostrar">
+        <button type="button" data-status="todas" aria-pressed="true">Todas</button>
+        <button type="button" data-status="pendentes" aria-pressed="false">Pendentes</button>
+        <button type="button" data-status="concluidas" aria-pressed="false">Concluídas</button>
+      </div>
+      <label class="campo">
+        <span class="oculto">Categoria</span>
+        <select id="filtro-categoria">
+          <option value="todas">Todas as categorias</option>
+          <option value="trabalho">Trabalho</option>
+          <option value="pessoal">Pessoal</option>
+          <option value="estudos">Estudos</option>
+        </select>
+      </label>
+    </section>
 
     <!-- Lista -->
-    <ul id="lista-tarefas"></ul>
+    <ul id="lista-tarefas" class="lista"></ul>
+    <p id="vazio" class="vazio" hidden></p>
+    <button type="button" id="limpar-concluidas" class="secundario" hidden>Apagar as concluídas</button>
+  </main>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite" hidden>
+    <span id="aviso-texto"></span>
+    <button type="button" id="aviso-desfazer">Desfazer</button>
   </div>
 
   <script src="script.js"></script>
